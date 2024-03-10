@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Author;
@@ -18,6 +20,7 @@ class AuthorController extends Controller
 
         return response()->json($authors->toJson());
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -29,6 +32,7 @@ class AuthorController extends Controller
             'success' => true,
         ]);
     }
+
     /**
      * Display the specified resource.
      */
@@ -36,23 +40,27 @@ class AuthorController extends Controller
     {
         return response()->json($author->toJson());
     }
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Author $author): JsonResponse
     {
         $author->update($request->all());
+
         return response()->json([
             'success' => true,
             'author' => $author->toArray(),
         ], 201);
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Author $author): Response
     {
         $author->delete();
+
         return response()->noContent();
     }
 }
